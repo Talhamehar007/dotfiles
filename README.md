@@ -11,4 +11,4 @@ Dot Files for my Linux Configurations
 >     ~/.config/neofetch/config.conf
 
 ### 3. bash:
->    ~/.bashrc
+>     ~/.bashrc
