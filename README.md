@@ -13,4 +13,3 @@ Dot Files for my Linux Configurations
 ### 3. bash:
 >    ~/.bashrc
 >    ~/.bash_aliases
-
