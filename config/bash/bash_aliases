@@ -13,3 +13,6 @@ alias s3="scrot -q 100 -d 3"
 alias lA="ls -lA"
 alias local-ip="hostname -I | cut -d' ' -f1"
 alias shutdown="shutdown -P now"
+alias copy="xclip -i -selection clipboard"
+alias paste="xclip -o -selecton clipboard"
+
