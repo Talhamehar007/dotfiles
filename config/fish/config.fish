@@ -5,3 +5,4 @@ set fish_greeting
 
 set XZ_DEFAULTS "--threads=4"; export XZ_DEFAULTS;
 
+export PATH="/home/$USER/.local/bin:/home/$USER/.deno/bin/:$PATH"
