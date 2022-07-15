@@ -19,3 +19,11 @@ Dot Files for my Linux Configurations
 ### 4. fish:
 
 >     ~/.config/fish/config.fish
+
+### 5. completions(exa):
+
+bash:
+>     /etc/bash_completion.d/
+
+fish:
+>     ~/.config/fish/completions
