@@ -2,7 +2,7 @@ alias mocp="mocp -T black_orange"
 alias fums="sudo apt autoclean && sudo apt clean && sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y --purge && sudo snap refresh"
 alias up="sudo apt update && sudo apt upgrade -y && sudo apt autopurge -y"
 alias public-ip="python3 -c \"import requests; print(requests.get('https://api.ipify.org').text)\""
-alias install-date="ls -alct /|tail -1|awk '{print \$6, \$7, \$8}'"
+alias install-date="/bin/ls -alct /|tail -1|awk '{print \$6, \$7, \$8}'"
 alias mp3="youtube-dl --extract-audio --audio-format mp3 --embed-thumbnail"
 alias open="xdg-open"
 alias cpufetch="cpufetch --color 239,90,45:210,200,200:0,0,0:100,200,45:0,200,200 -F"
@@ -15,8 +15,8 @@ alias local-ip="hostname -I | cut -d' ' -f1"
 alias shutdown="shutdown -P now"
 alias copy="xclip -i -selection clipboard"
 alias paste="xclip -o -selecton clipboard"
-
-
+alias wget="wget -c"
+alias gogh="bash -c  \"\$(wget -qO- https://git.io/vQgMr)\""
 
 # Aliases Copied from GARUDA
 
