@@ -3,14 +3,15 @@ alias fums="sudo apt autoclean && sudo apt clean && sudo apt update && sudo apt 
 alias up="sudo apt update && sudo apt upgrade -y && sudo apt autopurge -y"
 alias public-ip="python3 -c \"import requests; print(requests.get('https://api.ipify.org').text)\""
 alias install-date="/bin/ls -alct /|tail -1|awk '{print \$6, \$7, \$8}'"
-alias mp3="youtube-dl --extract-audio --audio-format mp3 --embed-thumbnail"
+alias mp3="yt-dlp --extract-audio --audio-format mp3 --embed-thumbnail"
 alias open="xdg-open"
 alias cpufetch="cpufetch --color 239,90,45:210,200,200:0,0,0:100,200,45:0,200,200 -F"
 alias scrot="scrot -q 100"
 alias s="scrot -q 100"
 alias s1="scrot -q 100 -d 1"
 alias s3="scrot -q 100 -d 3"
-alias lA="ls -lA"
+alias ld='find -maxdepth 1 -type d -exec basename {} \;'
+alias lA="/bin/ls -lA"
 alias local-ip="hostname -I | cut -d' ' -f1"
 alias shutdown="shutdown -P now"
 alias copy="xclip -i -selection clipboard"
@@ -29,7 +30,7 @@ alias la='exa -a --color=always --group-directories-first --icons'  # all files 
 alias ll='exa -l --color=always --group-directories-first --icons'  # long format
 alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
 alias l.="exa -a | egrep '^\.'"   
-alias l="exa"
+alias l="exa -1"
 
 # Common use
 alias dir='dir --color=auto'
@@ -43,3 +44,5 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
+alias get-chrome='wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+alias gen-pass="LC_ALL=C tr -dc A-Za-z0-9_ < /dev/urandom | head -c 16 | xargs"
