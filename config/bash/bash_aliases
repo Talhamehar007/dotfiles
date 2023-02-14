@@ -46,3 +46,6 @@ alias ......='cd ../../../../..'
 
 alias get-chrome='wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
 alias gen-pass="LC_ALL=C tr -dc A-Za-z0-9_ < /dev/urandom | head -c 16 | xargs"
+
+alias show-wifi-password="nmcli device wifi show-password"
+
