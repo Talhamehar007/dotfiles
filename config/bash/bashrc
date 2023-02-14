@@ -141,3 +141,7 @@ fi
 export PATH="/home/$USER/.local/bin:$PATH"
 
 XZ_DEFAULTS="--threads=4"; export XZ_DEFAULTS
+
+
+[[ -f ~/.bash_custom ]] && source ~/.bash_aliases
+[[ -f ~/.bash_custom ]] && source ~/.bash_custom
