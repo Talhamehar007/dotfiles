@@ -85,3 +85,10 @@ install_package() {
         exit 1
     fi
 }
+
+
+function copy {
+  cat "$1" | xclip -selection clipboard
+  echo "Copied contents of $1 to clipboard."
+}
+
