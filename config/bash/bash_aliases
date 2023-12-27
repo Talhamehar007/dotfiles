@@ -50,3 +50,5 @@ alias gen-pass="LC_ALL=C tr -dc A-Za-z0-9_ < /dev/urandom | head -c 16 | xargs"
 alias show-wifi-password="nmcli device wifi show-password"
 
 alias destroy="shred -u -z -n 6"
+alias encrypt="gpg --symmetric --cipher-algo AES256"
+alias decrypt="gpg --decrypt"
