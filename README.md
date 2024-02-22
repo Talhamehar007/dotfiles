@@ -19,7 +19,9 @@ Aliases
 curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/bash/bash_aliases > ~/.bash_aliases && source ~/.bash_aliases
 ```
 
->    curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/bash/bashrc > ~/.bashrc
+```bash
+curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/bash/bashrc > ~/.bashrc
+```
 
 ### 4. fish:
 
