@@ -88,7 +88,7 @@ case "$(uname -s)" in
     alias destroy="shred -u -z -n 6"
     alias get-chrome='wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
     alias show-wifi-password="nmcli device wifi show-password"
-    
+    alias fd="fdfind"
 
     ;;
   Darwin*)
