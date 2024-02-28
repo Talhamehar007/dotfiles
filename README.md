@@ -6,19 +6,24 @@ Dot Files for my Linux Configurations
 
 ### 1. starship:
 
->    curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/starship/starship.toml > ~/.config/starship.toml
+```bash
+curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/starship/starship.toml > ~/.config/starship.toml
+```
 
 ### 2. neofetch:
 
->      curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/neofetch/config.conf > ~/.config/neofetch/config.conf
+```bash
+curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/neofetch/config.conf > ~/.config/neofetch/config.conf
+```
 
 ### 3. bash:
 
-Aliases
+Aliases (.bash_aliases)
 ```bash
 curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/bash/bash_aliases > ~/.bash_aliases && source ~/.bash_aliases
 ```
 
+.bashrc:
 ```bash
 curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/bash/bashrc > ~/.bashrc
 ```
