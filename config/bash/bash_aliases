@@ -12,7 +12,7 @@ alias l='exa -a1 --color=always --group-directories-first --icons'  # all files 
 alias ll='exa -l --color=always --group-directories-first --icons'  # long format
 alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
 alias l.="exa -a | egrep '^\.'"   
-alias ls="exa -1"
+alias ls="exa -1 --color=always --group-directories-first --icons"
 alias ld="\find . -maxdepth 1 -type d  | xargs basename "
 
 
