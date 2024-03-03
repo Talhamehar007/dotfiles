@@ -2,9 +2,13 @@
 # COMMON ALIASES FOR BOTH LINUX AND DARWIN
 
 alias mp3="yt-dlp --extract-audio --audio-format mp3 --embed-thumbnail"
-alias public-ip="curl api.ipify.org || curl ifconfig.co || curl ifconfig.me || echo FAILED "
 alias gogh="bash -c  \"\$(wget -qO- https://git.io/vQgMr)\""
 alias wget="wget -c"
+
+
+# IP Address
+alias ip-public="curl api.ipify.org || curl ifconfig.co || curl ifconfig.me || echo FAILED "
+alias ipinfo="curl -s ifconfig.co/json | rich --json - || curl -s ifconfig.co/json"
 
 # Replace ls with exa
 alias la='exa -al --color=always --group-directories-first --icons' # preferred listing
@@ -36,7 +40,7 @@ alias lsall="compgen -c"
 
 # FUNCTION TO FIND LOCAL IP ADDRRESS
 
-local-ip() {
+ip-local() {
   case "$(uname -s)" in
     Linux*)
       # Linux
