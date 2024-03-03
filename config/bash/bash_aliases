@@ -113,6 +113,8 @@ case "$(uname -s)" in
     # Install coreutils using brew to use shred
     alias shred="gshred"
     alias destroy="gshred -uzn 6"
+    # Fix the clear command in macOS
+    alias clear="printf '\33c\e[3J'"
 
 
     ;;
