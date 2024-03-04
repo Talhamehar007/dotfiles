@@ -1,41 +1,51 @@
 # dotfiles
 
-Dot Files for my Linux Configurations
+Dot Files for Linux/Mac Configurations:
 
-## Location of Dot Files:
+## Location of Dot Files
 
-### 1. starship:
-
-```bash
-curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/starship/starship.toml > ~/.config/starship.toml
-```
-
-### 2. neofetch:
+### 1. starship
 
 ```bash
-curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/neofetch/config.conf > ~/.config/neofetch/config.conf
+curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/starship/starship.toml > ~/.config/starship.toml
 ```
 
-### 3. bash:
+### 2. neofetch
 
-Aliases (.bash_aliases)
 ```bash
-curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/bash/bash_aliases > ~/.bash_aliases && source ~/.bash_aliases
+curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/neofetch/config.conf > ~/.config/neofetch/config.conf
 ```
 
-.bashrc:
+### 3. bash
+
+#### Aliases (.bash_aliases)
+
 ```bash
-curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/config/bash/bashrc > ~/.bashrc
+curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/bash/bash_aliases > ~/.bash_aliases && source ~/.bash_aliases
 ```
 
-### 4. fish:
+#### .bashrc
 
->     ~/.config/fish/config.fish
+```bash
+curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/bash/bashrc > ~/.bashrc
+```
 
-### 5. completions(exa):
+### 4. fish
 
-bash:
->     /etc/bash_completion.d/
+```bash
+curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/fish/config.fish > ~/.config/fish/config.fish
+```
 
-fish:
->     ~/.config/fish/completions
+### 5. Exa Completions (Linux Only)
+
+#### bash
+
+```bash
+curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/bash/completions/exa.bash > /etc/bash_completion.d/
+```
+
+#### fish
+
+```bash
+curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/fish/completions/exa.fish > ~/.config/fish/completions
+```
