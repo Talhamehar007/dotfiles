@@ -1,0 +1,56 @@
+
+# Import Your Own Custom Theme from ~/.config/alacritty/themes
+
+import = [
+  # "~/.config/alacritty/themes/catppuccin-latte.toml"
+  # "~/.config/alacritty/themes/catppuccin-frappe.toml"
+  "~/.config/alacritty/themes/catppuccin-macchiato.toml"
+  # "~/.config/alacritty/themescatppuccin-mocha.toml"
+]
+
+
+[shell]
+program = "/bin/bash"
+args = ["-l"]
+
+
+[env]
+HISTFILESIZE = "1000000"
+HISTFILE = "~/.bash_history"
+TERM = "xterm-256color"
+
+[window]
+dimensions = { columns = 130, lines = 36}
+decorations = "Full"
+opacity = 0.9
+blur = true
+option_as_alt = "Both"
+
+
+[font]
+normal = { family = "MesloLGS NF", style = "Regular"}
+bold = { family = "MesloLGS NF"}
+italic = { family = "MesloLGS NF"}
+size = 13
+
+
+[cursor]
+style.shape = "Beam"
+style.blinking = "On"
+
+
+[terminal]
+osc52 = "CopyPaste"
+
+
+[mouse]
+bindings = [
+{ mouse = "Right", action = "Paste" },
+]
+
+
+[keyboard]
+bindings = [
+
+    { key = "K", mods = "Command", action = "ClearHistory" }
+]
