@@ -35,6 +35,9 @@ alias encrypt="gpg --symmetric --cipher-algo AES256"
 alias decrypt="gpg --decrypt"
 alias copy="rsync -avzh --progress"
 
+# View (T)op (H)istory Commands
+alias th='[[ -f ~/.bash_history || -f ~/.zsh_history ]] && \cat ~/.bash_history ~/.zsh_history | sort | uniq -c | sort -nr | head || echo "No history files found."'
+
 #  List all available comands (built-in, installed, and aliases & functions)
 alias lsall="compgen -c"
 
