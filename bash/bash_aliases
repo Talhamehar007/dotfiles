@@ -1,7 +1,8 @@
 
 # COMMON ALIASES FOR BOTH LINUX AND DARWIN
 
-alias mp3="yt-dlp --extract-audio --audio-format mp3 --embed-thumbnail"
+alias mp3="yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 --embed-thumbnail"
+alias ytdlp="yt-dlp -f "bv*+ba/b" --merge-output-format mp4 --embed-thumbnail"
 alias gogh="bash -c  \"\$(wget -qO- https://git.io/vQgMr)\""
 alias wget="wget -c"
 
