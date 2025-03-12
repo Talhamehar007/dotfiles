@@ -67,23 +67,23 @@ ip-local() {
 # FUNCTIONS TO FIND ALL PICTURES AND VIDEOS IN THE GIVEN DIR
 
 lsp() {
-    local dir=${1:-$(pwd)}
-
-    if [ -d "$dir" ]; then
-        fd -t f -e jpeg -e jpg -e png -e heic -i --base-directory "$dir"
-    else
-        echo "Error: The specified directory does not exist."
-    fi
+    local dir="${1:-.}"
+    fd --full-path -e jpg -e jpeg -e png -e gif -e bmp -e tiff -e tif -e webp -e heif -e heic -e avif -e jxl -e cr2 -e nef -e arw -e dng -e raf -e orf -e sr2 -e rw2 -e pef -e svg -e ai -e eps -e psd . "$dir"
 }
 
+lspc() {
+    local dir="${1:-.}"
+    fd --full-path -e jpg -e jpeg -e png -e gif -e bmp -e tiff -e tif -e webp -e heif -e heic -e avif -e jxl -e cr2 -e nef -e arw -e dng -e raf -e orf -e sr2 -e rw2 -e pef -e svg -e ai -e eps -e psd . "$dir" | wc -l
+}
 
-lsv () {
-	local dir=${1:-$(pwd)}
-	if [ -d "$dir" ]; then
-		fd -t f -e mp4 -e mkv -e avi -e mov -e flv -e webm -i --base-directory "$dir"
-	else
-		echo "Error: The specified directory does not exist."
-	fi
+lsv() {
+    local dir="${1:-.}"
+    fd --full-path -e mp4 -e mkv -e avi -e mov -e wmv -e flv -e webm -e mpg -e mpeg -e m4v -e ts -e hevc -e h265 -e vp9 -e ogv -e rm -e rmvb -e asf -e divx -e vob -e 3gp -e 3g2 . "$dir"
+}
+
+lsvc() {
+    local dir="${1:-.}"
+    fd --full-path -e mp4 -e mkv -e avi -e mov -e wmv -e flv -e webm -e mpg -e mpeg -e m4v -e ts -e hevc -e h265 -e vp9 -e ogv -e rm -e rmvb -e asf -e divx -e vob -e 3gp -e 3g2 . "$dir" | wc -l
 }
 
 
