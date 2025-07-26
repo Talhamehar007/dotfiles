@@ -4,19 +4,31 @@ Dot Files for Linux/Mac Configurations:
 
 ## Location of Dot Files
 
-### 1. starship
+
+### 1. GHOSTTY
+
+```
+if mkdir -p ~/.config/ghostty && \
+   curl -fsSL https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/ghostty/config -o ~/.config/ghostty/config; then
+  echo "✅ Ghostty config downloaded successfully."
+else
+  echo "❌ Failed to download Ghostty config."
+fi
+```
+
+### 2. starship
 
 ```bash
 curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/starship/starship.toml > ~/.config/starship.toml
 ```
 
-### 2. neofetch
+### 3. neofetch
 
 ```bash
 curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/neofetch/config.conf > ~/.config/neofetch/config.conf
 ```
 
-### 3. bash
+### 4. bash
 
 #### Aliases (.bash_aliases)
 
@@ -30,13 +42,13 @@ curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/bash/bash_ali
 curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/bash/bashrc > ~/.bashrc
 ```
 
-### 4. fish
+### 5. fish
 
 ```bash
 curl https://raw.githubusercontent.com/Talhamehar007/dotfiles/main/fish/config.fish > ~/.config/fish/config.fish
 ```
 
-### 5. Exa Completions (Linux Only)
+### 6. Exa Completions (Linux Only)
 
 #### bash
 
