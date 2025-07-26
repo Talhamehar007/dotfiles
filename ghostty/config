@@ -1,0 +1,14 @@
+window-width=130
+window-height=30
+background-opacity = 0.85
+shell-integration = "detect"
+shell-integration-features = "cursor,title,sudo"
+window-inherit-working-directory = true
+
+clipboard-read = allow
+clipboard-write = allow
+clipboard-paste-protection = false
+
+macos-option-as-alt = true
+
+cursor-click-to-move = true
