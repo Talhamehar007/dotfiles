@@ -32,7 +32,19 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
 gen-pass() {
-  LC_ALL=C tr -dc 'A-Za-z0-9_!@#\$%^&*()-_=+[]{}|;:,.<>?/' < /dev/urandom | head -c 16 | tee /dev/tty | xclip -selection clipboard
+  pass=$(LC_ALL=C tr -dc 'A-Za-z0-9_!@#\$%^&*()-_=+[]{}|;:,.<>?/' < /dev/urandom | head -c 16)
+  echo "$pass"  # Print once
+
+  if command -v pbcopy >/dev/null 2>&1; then
+    echo -n "$pass" | pbcopy
+  elif command -v xclip >/dev/null 2>&1; then
+    echo -n "$pass" | xclip -selection clipboard
+  elif command -v wl-copy >/dev/null 2>&1; then
+    echo -n "$pass" | wl-copy
+  else
+    echo "⚠️ No clipboard utility found (pbcopy, xclip, or wl-copy)"
+    return 1
+  fi
 }
 
 alias encrypt="gpg --symmetric --cipher-algo AES256"
