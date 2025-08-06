@@ -1,27 +1,32 @@
+# ────────────────────────────────
+# 📦 COMMON ALIASES FOR LINUX & macOS
+# ────────────────────────────────
 
-# COMMON ALIASES FOR BOTH LINUX AND DARWIN
+alias mp3='yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 --embed-thumbnail'
+alias ytdlp='yt-dlp -f "bv*+ba/b" --merge-output-format mp4 --embed-thumbnail'
+alias channel='yt-dlp --format "bv*+ba/b" --embed-thumbnail --output "%(channel)s/%(title)s.%(ext)s"'
+alias gogh='bash -c  "$(wget -qO- https://git.io/vQgMr)"'
+alias wget='wget -c'
+alias dc='docker-compose'
+alias dush='du -sh * 2>/dev/null | sort -h'
 
-alias mp3="yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 --embed-thumbnail"
-alias ytdlp="yt-dlp -f "bv*+ba/b" --merge-output-format mp4 --embed-thumbnail"
-alias gogh="bash -c  \"\$(wget -qO- https://git.io/vQgMr)\""
-alias wget="wget -c"
+# 📍 IP Address
+alias ip-public='curl api.ipify.org || curl ifconfig.co || curl ifconfig.me || echo FAILED'
+alias ipinfo='curl -s ifconfig.co/json | rich --json - || curl -s ifconfig.co/json'
 
+# 📂 Directory Listings (exa)
+alias la='exa -al --color=always --group-directories-first --icons'
+alias l='exa -a1 --color=always --group-directories-first --icons'
+alias ll='exa -l --color=always --group-directories-first --icons'
+alias lt='exa -aT --color=always --group-directories-first --icons'
+alias l.='exa -a | egrep "^\."'
+alias ls='exa -1 --color=always --group-directories-first --icons'
+alias ld='\find . -maxdepth 1 -type d | xargs basename'
 
-# IP Address
-alias ip-public="curl api.ipify.org || curl ifconfig.co || curl ifconfig.me || echo FAILED "
-alias ipinfo="curl -s ifconfig.co/json | rich --json - || curl -s ifconfig.co/json"
+# 🎥 FFMPEG Tools
+alias ffinfo='ffprobe -v quiet -print_format json -show_format -show_streams'
 
-# Replace ls with exa
-alias la='exa -al --color=always --group-directories-first --icons' # preferred listing
-alias l='exa -a1 --color=always --group-directories-first --icons'  # all files and dirs
-alias ll='exa -l --color=always --group-directories-first --icons'  # long format
-alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
-alias l.="exa -a | egrep '^\.'"   
-alias ls="exa -1 --color=always --group-directories-first --icons"
-alias ld="\find . -maxdepth 1 -type d  | xargs basename "
-
-
-# Common use
+# 🔍 Search + Clipboard + Misc
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -30,124 +35,132 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
+alias encrypt='gpg --symmetric --cipher-algo AES256'
+alias decrypt='gpg --decrypt'
+alias copy='rsync -avzh --progress'
 
-gen-pass() {
-  pass=$(LC_ALL=C tr -dc 'A-Za-z0-9_!@#\$%^&*()-_=+[]{}|;:,.<>?/' < /dev/urandom | head -c 16)
-  echo "$pass"  # Print once
+# 📊 History / Commands
+alias th='[[ -f ~/.bash_history || -f ~/.zsh_history ]] && \cat ~/.bash_history ~/.zsh_history | sort | uniq -c | sort -nr | head || echo "No history files found."'
+alias lsall='compgen -c'
 
-  if command -v pbcopy >/dev/null 2>&1; then
-    echo -n "$pass" | pbcopy
-  elif command -v xclip >/dev/null 2>&1; then
-    echo -n "$pass" | xclip -selection clipboard
-  elif command -v wl-copy >/dev/null 2>&1; then
-    echo -n "$pass" | wl-copy
-  else
-    echo "⚠️ No clipboard utility found (pbcopy, xclip, or wl-copy)"
+# ────────────────────────────────
+# 📦 COMPRESSION: ztar
+# ────────────────────────────────
+
+# ztar - Compress a file or directory into .tar.zst using multithreaded zstd with optional level
+ztar() {
+  if [ -z "$1" ]; then
+    echo "❌ Usage: ztar <path-to-directory-or-file> [compression-level]"
     return 1
   fi
+
+  local input="$1"
+  local level="${2:--9}"
+  local base=$(basename "$input")
+  local parent=$(dirname "$input")
+  local output="${base}.tar.zst"
+
+  tar -C "$parent" --use-compress-program="zstd -T0 --long $level" -cf "$output" "$base"
+  echo "✅ Compressed to: $output (level $level)"
 }
 
-alias encrypt="gpg --symmetric --cipher-algo AES256"
-alias decrypt="gpg --decrypt"
-alias copy="rsync -avzh --progress"
+# ztarx - Extract a .tar.zst archive
+ztarx() {
+  if [ -z "$1" ]; then
+    echo "❌ Usage: ztarx <archive.tar.zst>"
+    return 1
+  fi
 
-# View (T)op (H)istory Commands
-alias th='[[ -f ~/.bash_history || -f ~/.zsh_history ]] && \cat ~/.bash_history ~/.zsh_history | sort | uniq -c | sort -nr | head || echo "No history files found."'
+  local archive="$1"
+  tar --use-compress-program="unzstd" -xf "$archive"
+  echo "✅ Extracted: $archive"
+}
 
-#  List all available comands (built-in, installed, and aliases & functions)
-alias lsall="compgen -c"
 
-# FUNCTION TO FIND LOCAL IP ADDRRESS
+# ────────────────────────────────
+# 🌐 NETWORK: Local IP Finder
+# ────────────────────────────────
 
 ip-local() {
   case "$(uname -s)" in
-    Linux*)
-      # Linux
-      ip addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | grep -v '127.0.0.1' | head -n 1
-      ;;
-    Darwin*)
-      # macOS
-      ipconfig getifaddr en0
-      ;;
-    *)
-      echo "Unsupported operating system"
-      return 1
-      ;;
+    Linux*) ip addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | grep -v '127.0.0.1' | head -n 1 ;;
+    Darwin*) ipconfig getifaddr en0 ;;
+    *) echo "Unsupported operating system"; return 1 ;;
   esac
 }
 
-# FUNCTIONS TO FIND ALL PICTURES AND VIDEOS IN THE GIVEN DIR
+# ────────────────────────────────
+# 🖼️ MEDIA: List Photos / Videos
+# ────────────────────────────────
 
 lsp() {
-    local dir="${1:-.}"
-    fd --full-path -e jpg -e jpeg -e png -e gif -e bmp -e tiff -e tif -e webp -e heif -e heic -e avif -e jxl -e cr2 -e nef -e arw -e dng -e raf -e orf -e sr2 -e rw2 -e pef -e svg -e ai -e eps -e psd . "$dir"
+  local dir="${1:-.}"
+  fd --full-path -e jpg -e jpeg -e png -e gif -e bmp -e tiff -e tif -e webp -e heif -e heic -e avif -e jxl -e cr2 -e nef -e arw -e dng -e raf -e orf -e sr2 -e rw2 -e pef -e svg -e ai -e eps -e psd . "$dir"
 }
 
 lspc() {
-    local dir="${1:-.}"
-    fd --full-path -e jpg -e jpeg -e png -e gif -e bmp -e tiff -e tif -e webp -e heif -e heic -e avif -e jxl -e cr2 -e nef -e arw -e dng -e raf -e orf -e sr2 -e rw2 -e pef -e svg -e ai -e eps -e psd . "$dir" | wc -l
+  local dir="${1:-.}"
+  fd --full-path -e jpg -e jpeg -e png -e gif -e bmp -e tiff -e tif -e webp -e heif -e heic -e avif -e jxl -e cr2 -e nef -e arw -e dng -e raf -e orf -e sr2 -e rw2 -e pef -e svg -e ai -e eps -e psd . "$dir" | wc -l
 }
 
 lsv() {
-    local dir="${1:-.}"
-    fd --full-path -e mp4 -e mkv -e avi -e mov -e wmv -e flv -e webm -e mpg -e mpeg -e m4v -e ts -e hevc -e h265 -e vp9 -e ogv -e rm -e rmvb -e asf -e divx -e vob -e 3gp -e 3g2 . "$dir"
+  local dir="${1:-.}"
+  fd --full-path -e mp4 -e mkv -e avi -e mov -e wmv -e flv -e webm -e mpg -e mpeg -e m4v -e ts -e hevc -e h265 -e vp9 -e ogv -e rm -e rmvb -e asf -e divx -e vob -e 3gp -e 3g2 . "$dir"
 }
 
 lsvc() {
-    local dir="${1:-.}"
-    fd --full-path -e mp4 -e mkv -e avi -e mov -e wmv -e flv -e webm -e mpg -e mpeg -e m4v -e ts -e hevc -e h265 -e vp9 -e ogv -e rm -e rmvb -e asf -e divx -e vob -e 3gp -e 3g2 . "$dir" | wc -l
+  local dir="${1:-.}"
+  fd --full-path -e mp4 -e mkv -e avi -e mov -e wmv -e flv -e webm -e mpg -e mpeg -e m4v -e ts -e hevc -e h265 -e vp9 -e ogv -e rm -e rmvb -e asf -e divx -e vob -e 3gp -e 3g2 . "$dir" | wc -l
 }
 
+# ────────────────────────────────
+# 🧠 RANDOM UTILITY FUNCTIONS
+# ────────────────────────────────
 
-# LINUX AND DARWIN SPESCIFIC ALIASES  
+gen-pass() {
+  LC_ALL=C tr -dc 'A-Za-z0-9_!@#\$%^&*()-_=+[]{}|;:,.<>?/' < /dev/urandom | head -c 16 | tee /dev/tty | xclip -selection clipboard
+}
+
+# ────────────────────────────────
+# 🖥️ OS-SPECIFIC ALIASES
+# ────────────────────────────────
 
 case "$(uname -s)" in
   Linux*)
-    alias fums="sudo apt autoclean && sudo apt clean && sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y --purge && sudo snap refresh"
-    alias up="sudo apt update && sudo apt upgrade -y && sudo apt autopurge -y"
-    alias install-date="/bin/ls -alct /|tail -1|awk '{print \$6, \$7, \$8}'"
-    alias scrot="scrot -q 100"
-    alias s="scrot -q 100"
-    alias s1="scrot -q 100 -d 1"
-    alias s3="scrot -q 100 -d 3"
+    alias fums='sudo apt autoclean && sudo apt clean && sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y --purge && sudo snap refresh'
+    alias up='sudo apt update && sudo apt upgrade -y && sudo apt autopurge -y'
+    alias install-date='/bin/ls -alct /|tail -1|awk "{print \$6, \$7, \$8}"'
+    alias scrot='scrot -q 100'
+    alias s='scrot -q 100'
+    alias s1='scrot -q 100 -d 1'
+    alias s3='scrot -q 100 -d 3'
     alias ld='find -maxdepth 1 -type d -exec basename {} \;'
-    alias lA="/bin/ls -lA"
-    alias shutdown="shutdown -P now"
-    alias copy="xclip -i -selection clipboard"
-    alias paste="xclip -o -selecton clipboard"
+    alias lA='/bin/ls -lA'
+    alias shutdown='shutdown -P now'
+    alias copy='xclip -i -selection clipboard'
+    alias paste='xclip -o -selecton clipboard'
     alias cat='batcat'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
-    alias destroy="shred -u -z -n 6"
+    alias destroy='shred -u -z -n 6'
     alias get-chrome='wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
-    alias show-wifi-password="nmcli device wifi show-password"
-    alias fd="fdfind"
-
+    alias show-wifi-password='nmcli device wifi show-password'
+    alias fd='fdfind'
     ;;
+
   Darwin*)
-    alias battery="pmset -g batt"
-    alias sysinfo="system_profiler SPHardwareDataType SPSoftwareDataType"
-    alias vnstat="vnstat -i en0"
-    alias cat="bat"
-    # Show hidden files in Finder
+    alias battery='pmset -g batt'
+    alias sysinfo='system_profiler SPHardwareDataType SPSoftwareDataType'
+    alias vnstat='vnstat -i en1'
+    alias cat='bat'
     alias showhidden='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
-    # Hide hidden files in Finder
     alias hidehidden='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
-    # Empty the Trash
     alias emptytrash='sudo rm -rf ~/.Trash/*'
-    # Turn off Wi-Fi
     alias wifi-off='networksetup -setairportpower en0 off'
-    # Turn on Wi-Fi
     alias wifi-on='networksetup -setairportpower en0 on'
-    # Install coreutils using brew to use shred
-    alias shred="gshred"
-    alias destroy="gshred -uzn 6"
-    # Fix the clear command in macOS
+    alias shred='gshred'
+    alias destroy='gshred -uzn 6'
     alias clear="printf '\33c\e[3J'"
-    # Capture screenshot and save it in the current dir
-    alias s='screencapture -x "$(date).png"'
-    alias screenshot='screencapture -x "$(date).png"'
-
-
+    alias s='screencapture -x "Screenshot_$(date %Y%m%d_%H%M%S).png"'
     ;;
-  esac
+esac
