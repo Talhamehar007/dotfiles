@@ -18,6 +18,22 @@ alias wget='wget -c'
 alias dc='docker-compose'
 alias dush='du -sh * 2>/dev/null | sort -h'
 
+# ─── UTILITY FUNCTIONS ──────────────────────────────────────────────────────────────
+
+# rand - Generate a secure random string of given length (with letters, numbers, and symbols)
+rand() {
+  local length="${1:-16}"
+
+  if [[ "$length" -lt 1 ]]; then
+    echo "❌ Usage: rand <length>"
+    return 1
+  fi
+
+  LC_ALL=C tr -dc 'A-Za-z0-9!@#$%^&*()_+{}[]:;<>,.?~\-=' < /dev/urandom | head -c "$length"
+  echo
+}
+
+
 # 📍 IP Address
 alias ip-public='curl api.ipify.org || curl ifconfig.co || curl ifconfig.me || echo FAILED'
 alias ipinfo='curl -s ifconfig.co/json | rich --json - || curl -s ifconfig.co/json'
