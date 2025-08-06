@@ -63,7 +63,7 @@ ztar() {
   fi
 
   local input="$1"
-  local level="${2:--9}"
+  local level="${2:--3}"
   local base=$(basename "$input")
   local parent=$(dirname "$input")
   local output="${base}.tar.zst"
