@@ -10,7 +10,14 @@ command -v bat >/dev/null 2>&1 || alias bat="cat"
 # 📦 COMMON ALIASES FOR LINUX & macOS
 # ────────────────────────────────
 
-alias mp3='yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 --embed-thumbnail'
+# ─── yt-dlp FUNCTIONS ──────────────────────────────────────────────────────────────
+
+alias mp3='yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata'
+alias flac='yt-dlp --extract-audio --audio-format flac --audio-quality 0 --embed-thumbnail --add-metadata'
+alias alac='yt-dlp --extract-audio --audio-format alac --audio-quality 0 --embed-thumbnail --add-metadata'
+alias m4a='yt-dlp --extract-audio --audio-format m4a --audio-quality 0 --embed-thumbnail --add-metadata'
+
+
 alias ytdlp='yt-dlp -f "bv*+ba/b" --merge-output-format mp4 --embed-thumbnail'
 alias channel='yt-dlp --format "bv*+ba/b" --embed-thumbnail --output "%(channel)s/%(title)s.%(ext)s"'
 alias gogh='bash -c  "$(wget -qO- https://git.io/vQgMr)"'
