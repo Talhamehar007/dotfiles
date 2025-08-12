@@ -45,14 +45,24 @@ rand() {
 alias ip-public='curl api.ipify.org || curl ifconfig.co || curl ifconfig.me || echo FAILED'
 alias ipinfo='curl -s ifconfig.co/json | rich --json - || curl -s ifconfig.co/json'
 
-# 📂 Directory Listings (exa)
-alias la='exa -al --color=always --group-directories-first --icons'
-alias l='exa -a1 --color=always --group-directories-first --icons'
-alias ll='exa -l --color=always --group-directories-first --icons'
-alias lt='exa -aT --color=always --group-directories-first --icons'
-alias l.='exa -a | egrep "^\."'
-alias ls='exa -1 --color=always --group-directories-first --icons'
-alias ld='\find . -maxdepth 1 -type d | xargs basename'
+# 📂 Directory Listings (eza, fallback to ls if missing)
+if command -v eza >/dev/null 2>&1; then
+  alias la='eza -al --color=always --group-directories-first --icons=auto'
+  alias l='eza -a1 --color=always --group-directories-first --icons=auto'
+  alias ll='eza -l --color=always --group-directories-first --icons=auto'
+  alias lt='eza -aT --color=always --group-directories-first --icons=auto'
+  alias l.='eza -a --color=always --group-directories-first --icons=auto | egrep "^\."'
+  alias ls='eza -1 --color=always --group-directories-first --icons=auto'
+  alias ld='\find . -maxdepth 1 -type d | xargs basename'
+else
+  alias la='ls -la'
+  alias l='ls -a1'
+  alias ll='ls -l'
+  alias lt='ls -la'
+  alias l.='ls -a | egrep "^\."'
+  alias ls='ls -1'
+  alias ld='\find . -maxdepth 1 -type d | xargs basename'
+fi
 
 # 🎥 FFMPEG Tools
 alias ffinfo='ffprobe -v quiet -print_format json -show_format -show_streams'
