@@ -12,3 +12,6 @@ clipboard-paste-protection = false
 macos-option-as-alt = true
 
 cursor-click-to-move = true
+
+command = "/opt/homebrew/bin/zsh -l"
+font-family = "JetBrainsMono Nerd Font"
