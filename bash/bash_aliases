@@ -134,6 +134,10 @@ ip-local() {
 # 🖼️ MEDIA: List Photos / Videos
 # ────────────────────────────────
 
+# Count Files in a given dir
+
+alias fcount="fd -uuu | wc -l | awk '{printf \"%'\''d\n\", \$1}'"
+
 lsp() {
   local dir="${1:-.}"
   fd --full-path -e jpg -e jpeg -e png -e gif -e bmp -e tiff -e tif -e webp -e heif -e heic -e avif -e jxl -e cr2 -e nef -e arw -e dng -e raf -e orf -e sr2 -e rw2 -e pef -e svg -e ai -e eps -e psd . "$dir"
